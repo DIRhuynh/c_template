@@ -82,13 +82,69 @@ status expect_null(generic_ptr object_ptr, char *message)
   return SUCCESS;
 }
 
+status expect_non_null(generic_ptr object_ptr, char *message)
+{
+  printf("%s: ", message);
+
+  if (object_ptr == NULL) {
+    printf("failed\n");
+    printf("\texpected non NULL, got NULL.\n");
+    return ERROR;
+  }
+
+  printf("passed.\n");
+  return SUCCESS;
+}
+
 status expect_success(status s, char *message)
 {
   printf("%s: ", message);
 
   if (s != SUCCESS) {
     printf("failed\n");
-    printf("\texpected SUCCESS (0), got ERROR(1).\n");
+    printf("\texpected SUCCESS(0), got ERROR(1).\n");
+    return ERROR;
+  }
+
+  printf("passed.\n");
+  return SUCCESS;
+}
+
+status expect_error(status s, char *message)
+{
+  printf("%s: ", message);
+
+  if (s != ERROR) {
+    printf("failed\n");
+    printf("\texpected ERROR(1), got SUCCESS(0).\n");
+    return ERROR;
+  }
+
+  printf("passed.\n");
+  return SUCCESS;
+}
+
+status expect_true(bool b, char *message)
+{
+  printf("%s: ", message);
+
+  if (b != TRUE) {
+    printf("failed\n");
+    printf("\texpected TRUE(1), got FALSE(0).\n");
+    return ERROR;
+  }
+
+  printf("passed.\n");
+  return SUCCESS;
+}
+
+status expect_false(bool b, char *message)
+{
+  printf("%s: ", message);
+
+  if (b != FALSE) {
+    printf("failed\n");
+    printf("\texpected FALSE(0), got TRUE(1).\n");
     return ERROR;
   }
 
@@ -99,8 +155,8 @@ status expect_success(status s, char *message)
 /**
  * Tester helper that checks equality.
  *
- * a - a pointer to integer or NULL
- * b - a pointer to integer or NULL
+ * a - a pointer to integer
+ * b - a pointer to integer
  *
  * Returns a bool representing equality
  */
@@ -116,8 +172,8 @@ bool to_be(int *a, int *b)
 /**
  * Tester helper that checks inequality.
  *
- * a - a pointer to integer or NULL
- * b - a pointer to integer or NULL
+ * a - a pointer to integer
+ * b - a pointer to integer
  *
  * Returns a bool representing inequality
  */

@@ -20,7 +20,11 @@
    */
   status expect(int *a, bool (*compare)(int *a, int *b), int *b, char *message);
   status expect_null(generic_ptr object_ptr, char *message);
+  status expect_non_null(generic_ptr object_ptr, char *message);
   status expect_success(status s, char *message);
+  status expect_error(status s, char *message);
+  status expect_true(bool b, char *message);
+  status expect_false(bool b, char *message);
 
   /**
    * Test Framework: Comparison Functions
