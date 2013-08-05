@@ -81,7 +81,7 @@ status test_is_prime()
   }
 
   if (test_result == SUCCESS) {
-    test_result = expect_true(is_prime(e), "29 is not a prime");
+    expect_true(is_prime(e), "29 is not a prime");
   }
 
   printf("\n\n--------------------------------------------------\n");
